@@ -1,0 +1,15 @@
+{
+  "name": "host-information",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/nzws/host-information",
+  "author": "Yuzuki Aida <dev@nzws.me>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "koa": "2.14.2"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}

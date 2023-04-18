@@ -1,9 +1,14 @@
-FROM denoland/deno:1.32.4
+FROM node:18-slim
 
-WORKDIR /app
-USER deno
+USER node
+RUN mkdir /home/node/app
+WORKDIR /home/node/app
+
+COPY --chown=node:node package.json yarn.lock ./
+
+RUN yarn install
 
 COPY . .
-RUN deno cache main.ts
 
-CMD ["task", "start"]
+EXPOSE 8080
+CMD [ "node", "index.js" ]
