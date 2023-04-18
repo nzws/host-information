@@ -1,0 +1,27 @@
+version: 2.1
+
+executors:
+  arm:
+    machine:
+      image: ubuntu-2004:current
+      docker_layer_caching: true
+    resource_class: arm.medium
+
+jobs:
+  build-and-publish:
+    executor: arm
+    steps:
+      - checkout
+      - run: docker buildx build -t ghcr.io/nzws/host-information:$TAG-arm64 .
+      - run: echo $GHCR_TOKEN | docker login ghcr.io -u $GHCR_USER --password-stdin
+      - run: docker push ghcr.io/nzws/host-information:$TAG-arm64
+
+workflows:
+  production:
+    jobs:
+      - build-and-publish:
+          filters:
+            branches:
+              only: main
+          pre-steps:
+            - run: echo 'export TAG=latest' >> "$BASH_ENV"
