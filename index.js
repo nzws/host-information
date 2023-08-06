@@ -34,6 +34,7 @@ app.use(async (ctx) => {
     cpus: os.cpus(),
     networkInterfaces: os.networkInterfaces(),
     yourIp: ctx.request.ip,
+    headers: ctx.headers,
   };
 });
 
