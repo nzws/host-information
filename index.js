@@ -33,6 +33,7 @@ app.use(async (ctx) => {
     freemem: os.freemem(),
     cpus: os.cpus(),
     networkInterfaces: os.networkInterfaces(),
+    yourIp: ctx.request.ip,
   };
 });
 
